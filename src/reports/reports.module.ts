@@ -8,9 +8,9 @@ import { ReportsController } from './reports.controller';
 @Module({
   providers: [
     ReportServiceFactory,
-    EmptyReportService,
-    HalfReportService,
-    FullReportService,
+    { provide: 'EmptyReportService', useClass: EmptyReportService },
+    { provide: 'HalfReportService', useClass: HalfReportService },
+    { provide: 'FullReportService', useClass: FullReportService },
   ],
   controllers: [ReportsController],
 })
