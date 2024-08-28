@@ -1,12 +1,13 @@
 import { Controller, Param, Post } from '@nestjs/common';
-import { ReportServiceFactory } from './report-service.factory';
+import { ReportCommandFactory } from './report-command.factory';
 
 @Controller('reports')
 export class ReportsController {
-  constructor(private readonly reportServiceFactory: ReportServiceFactory) {}
+  constructor(private readonly reportCommandFactory: ReportCommandFactory) {}
 
   @Post(':code/submit')
   submitReport(@Param('code') code: string) {
-    return this.reportServiceFactory.get(code).submit();
+    const command = this.reportCommandFactory.get(code);
+    return command.execute();
   }
 }
